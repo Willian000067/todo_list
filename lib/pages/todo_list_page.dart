@@ -21,6 +21,8 @@ class TodoListPage extends StatelessWidget {
                 decoration: InputDecoration(
                   labelText: 'E-mail',
                 ),
+                onChanged: onChanged,
+                onSubmitted: onSubmitted,
               ),
               ElevatedButton(
                 onPressed: login,
@@ -36,5 +38,13 @@ class TodoListPage extends StatelessWidget {
   //Codigo para o botao 'entrar' funcionar
   void login() {
     print('Entrar');
+  }
+
+  void onChanged(String text) {
+    //print(text);
+  }
+
+  void onSubmitted(String text) {
+    print(text);
   }
 }
