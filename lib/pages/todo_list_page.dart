@@ -1,50 +1,38 @@
 import 'package:flutter/material.dart';
 
 class TodoListPage extends StatelessWidget {
-  TodoListPage({Key? key}) : super(key: key);
-
-  // Codigo para pegar o texto que a pessoa digitou (exemplo: email) e utilizar ele. Depois preciso incluir no SCAFFOLD.
-  final TextEditingController emailController = TextEditingController();
+  const TodoListPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
         child: Padding(
-          padding: const EdgeInsets.all(16),
-          child: Column(
-            //Essa linha abaixo serve para centralizar tudo no meio da tela 'horizontalmente'
-            mainAxisSize: MainAxisSize.min,
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: Row(
             children: [
-              TextField(
-                controller: emailController,
-                decoration: InputDecoration(
-                  labelText: 'E-mail',
+              Expanded(
+                //O expanded ajuda a deixar o widget ocupando todo espaco disponivel.
+                child: TextField(
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: 'Adicione uma tarefa',
+                    hintText:
+                        'Ex.: Estudar', //Esse comando serve para deixar uma dica para o usuario.
+                  ),
                 ),
-                onChanged: onChanged,
-                onSubmitted: onSubmitted,
               ),
+              SizedBox(
+                  width:
+                      8), // Para separa um componente do outro com um espaço no meio.
               ElevatedButton(
-                onPressed: login,
-                child: Text('Entrar'),
+                onPressed: () {},
+                child: Text('+'),
               ),
             ],
           ),
         ),
       ),
     );
-  }
-
-  //Codigo para o botao 'entrar' funcionar
-  void login() {
-    print('Entrar');
-  }
-
-  void onChanged(String text) {
-    //print(text);
-  }
-
-  void onSubmitted(String text) {
-    print(text);
   }
 }
