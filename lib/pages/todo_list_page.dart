@@ -1,8 +1,17 @@
 import 'package:flutter/material.dart';
 
-class TodoListPage extends StatelessWidget {
-  const TodoListPage({Key? key}) : super(key: key);
+class TodoListPage extends StatefulWidget {
+  TodoListPage({Key? key}) : super(key: key);
 
+  @override
+  State<TodoListPage> createState() => _TodoListPageState();
+}
+
+class _TodoListPageState extends State<TodoListPage> {
+  final TextEditingController todoController = TextEditingController();
+  // Codigo para pescar as tarefas digitadas.
+  List<String> todos = [];
+  // Escrever sempre em ingles Tarefas = Todos (to do(s)).
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,11 +26,12 @@ class TodoListPage extends StatelessWidget {
                   Expanded(
                     //O expanded ajuda a deixar o widget ocupando todo espaco disponivel.
                     child: TextField(
+                      controller: todoController,
                       decoration: InputDecoration(
                         border: OutlineInputBorder(),
                         labelText: 'Adicione uma tarefa',
                         hintText:
-                            'Ex.: Estudar', //Esse comando serve para deixar uma dica para o usuario.
+                            'Adicionar sua tarefa!', //Esse comando serve para deixar uma dica para o usuario.
                       ),
                     ),
                   ),
@@ -31,7 +41,13 @@ class TodoListPage extends StatelessWidget {
                           8), // Para separa um componente do outro com um espaço no meio.
 
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      String text = todoController.text;
+                      setState(() {
+                        todos.add(text);
+                      });
+                      todoController.clear();
+                    },
                     style: ElevatedButton.styleFrom(
                       primary: Colors.black,
                       padding: EdgeInsets.all(14),
@@ -48,19 +64,20 @@ class TodoListPage extends StatelessWidget {
                 height: 16,
               ), // Esse codigo serve para realizar o afastamento na VERTICAL.
 
-              ListView(
-                shrinkWrap:
-                    true, // Esse comando serve para deixar a lista mais enxuta possivel.
-                children: [
-                  Container(
-                    color: Colors.red,
-                    height: 50,
-                  ),
-                  Container(
-                    color: Colors.yellow,
-                    height: 50,
-                  ),
-                ],
+              Flexible(
+                child: ListView(
+                  shrinkWrap:
+                      true, // Esse comando serve para deixar a lista mais enxuta possivel.
+                  children: [
+                    for (String todo in todos)
+                      ListTile(
+                        title: Text(todo),
+                        onTap: () {
+                          print('tarefa: $todo');
+                        },
+                      ),
+                  ],
+                ),
               ),
 
               SizedBox(
