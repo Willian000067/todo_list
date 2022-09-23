@@ -27,7 +27,14 @@ class TodoListPage extends StatelessWidget {
                       8), // Para separa um componente do outro com um espaço no meio.
               ElevatedButton(
                 onPressed: () {},
-                child: Text('+'),
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.black,
+                  padding: EdgeInsets.all(14),
+                ),
+                child: Icon(
+                  Icons.add,
+                  size: 30,
+                ),
               ),
             ],
           ),
