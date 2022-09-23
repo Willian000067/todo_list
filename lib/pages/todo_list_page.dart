@@ -48,6 +48,25 @@ class TodoListPage extends StatelessWidget {
                 height: 16,
               ), // Esse codigo serve para realizar o afastamento na VERTICAL.
 
+              ListView(
+                shrinkWrap:
+                    true, // Esse comando serve para deixar a lista mais enxuta possivel.
+                children: [
+                  Container(
+                    color: Colors.red,
+                    height: 50,
+                  ),
+                  Container(
+                    color: Colors.yellow,
+                    height: 50,
+                  ),
+                ],
+              ),
+
+              SizedBox(
+                height: 16,
+              ),
+
               Row(
                 children: [
                   Expanded(
