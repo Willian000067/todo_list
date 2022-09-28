@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todo_list/widgets/todo_list_item.dart';
 
 class TodoListPage extends StatefulWidget {
   TodoListPage({Key? key}) : super(key: key);
@@ -69,13 +70,7 @@ class _TodoListPageState extends State<TodoListPage> {
                   shrinkWrap:
                       true, // Esse comando serve para deixar a lista mais enxuta possivel.
                   children: [
-                    for (String todo in todos)
-                      ListTile(
-                        title: Text(todo),
-                        onTap: () {
-                          print('tarefa: $todo');
-                        },
-                      ),
+                    for (String todo in todos) TodoListItem(),
                   ],
                 ),
               ),
