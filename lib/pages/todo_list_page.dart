@@ -108,7 +108,7 @@ class _TodoListPageState extends State<TodoListPage> {
                             8), // Para separa um componente do outro com um espaço no meio.
 
                     ElevatedButton(
-                      onPressed: () {},
+                      onPressed: showDeleteTodosConfirmationDialog,
                       style: ElevatedButton.styleFrom(
                         primary: Colors.black,
                         padding: EdgeInsets.all(14),
@@ -152,8 +152,41 @@ class _TodoListPageState extends State<TodoListPage> {
             });
           },
         ),
-        duration: const Duration(seconds: 5
+        duration: const Duration(seconds: 5),
       ),
     );
+  }
+
+  void showDeleteTodosConfirmationDialog() {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text('Limpar Tudo?'),
+        content: Text('Voce tem certeza?'),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.of(context)
+                  .pop(); // Para apenas fechar o a caixa de diagolo sem nenhuma acao.
+            },
+            child: Text('Cancelar'),
+          ),
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+              deletedAllTodos();
+            },
+            style: TextButton.styleFrom(primary: Colors.red),
+            child: Text('Limpar tudo'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void deletedAllTodos() {
+    setState(() {
+      todos.clear();
+    });
   }
 }
