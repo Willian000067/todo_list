@@ -80,8 +80,9 @@ class _TodoListPageState extends State<TodoListPage> {
                     children: [
                       for (Todo todo in todos)
                         TodoListItem(
-                          todo:
-                              todo, //parte da ligacao de pegar o que é digitado para salvar na lista.
+                          todo: todo,
+                          onDelete:
+                              onDelete, //parte da ligacao de pegar o que é digitado para salvar na lista.
                         ),
                     ],
                   ),
@@ -122,5 +123,11 @@ class _TodoListPageState extends State<TodoListPage> {
         ),
       ),
     );
+  }
+
+  void onDelete(Todo todo) {
+    setState(() {
+      todos.remove(todo);
+    });
   }
 }
