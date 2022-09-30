@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todo_list/models/todo.dart';
 import 'package:todo_list/widgets/todo_list_item.dart';
 
 class TodoListPage extends StatefulWidget {
@@ -11,8 +12,10 @@ class TodoListPage extends StatefulWidget {
 class _TodoListPageState extends State<TodoListPage> {
   final TextEditingController todoController = TextEditingController();
   // Codigo para pescar as tarefas digitadas.
-  List<String> todos = [];
+
+  List<Todo> todos = [];
   // Escrever sempre em ingles Tarefas = Todos (to do(s)).
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -46,7 +49,11 @@ class _TodoListPageState extends State<TodoListPage> {
                       onPressed: () {
                         String text = todoController.text;
                         setState(() {
-                          todos.add(text);
+                          Todo newTodo = Todo(
+                            title: text,
+                            dateTime: DateTime.now(),
+                          );
+                          todos.add(newTodo);
                         });
                         todoController.clear();
                       },
@@ -71,9 +78,9 @@ class _TodoListPageState extends State<TodoListPage> {
                     shrinkWrap:
                         true, // Esse comando serve para deixar a lista mais enxuta possivel.
                     children: [
-                      for (String todo in todos)
+                      for (Todo todo in todos)
                         TodoListItem(
-                          title:
+                          todo:
                               todo, //parte da ligacao de pegar o que é digitado para salvar na lista.
                         ),
                     ],
